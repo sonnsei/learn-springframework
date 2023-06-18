@@ -1,38 +1,15 @@
-package com.zhouyu;
+package com.sonnsei;
 
-import com.zhouyu.service.User;
-import com.zhouyu.service.UserService;
-import org.aopalliance.aop.Advice;
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.aop.Pointcut;
-import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.support.AbstractPointcutAdvisor;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodProxy;
+import com.sonnsei.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.util.StopWatch;
-
-import javax.annotation.PostConstruct;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class Test {
 
 	public static void main(String[] args) {
 
 		// 创建一个Spring容器
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		UserService userService = (UserService) applicationContext.getBean("userService");
 		userService.test();

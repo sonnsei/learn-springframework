@@ -1,21 +1,9 @@
-package com.zhouyu;
+package com.sonnsei;
 
-import com.zhouyu.service.OrderService;
 import org.springframework.context.annotation.*;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-
-@ComponentScan("com.zhouyu")
+@ComponentScan("com.sonnsei")
 @EnableScheduling
 @PropertySource("classpath:spring.properties")
 public class AppConfig {

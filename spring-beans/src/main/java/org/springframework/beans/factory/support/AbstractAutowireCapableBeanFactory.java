@@ -420,6 +420,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		Object result = existingBean;
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
 			Object current = processor.postProcessBeforeInitialization(result, beanName);
+			//所以实例化只执行一次
 			if (current == null) {
 				return result;
 			}
@@ -1449,6 +1450,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		PropertyDescriptor[] filteredPds = null;
 		if (hasInstAwareBpps) {
 			if (pvs == null) {
+				//pvs可能在之前的扩展点中已经手动设置了置
 				pvs = mbd.getPropertyValues();
 			}
 			for (InstantiationAwareBeanPostProcessor bp : getBeanPostProcessorCache().instantiationAware) {

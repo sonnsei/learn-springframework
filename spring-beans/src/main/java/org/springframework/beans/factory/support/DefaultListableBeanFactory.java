@@ -940,6 +940,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			// 获取合并后的BeanDefinition
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
 
+			//这里的abstract不是抽象类，因为抽象类如果没有loopup方法是不会创建bdf的，这里指的是bdf的抽象
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
 				if (isFactoryBean(beanName)) {
 					// 获取FactoryBean对象

@@ -1,9 +1,8 @@
-package com.zhouyu.controller;
+package com.sonnsei.controller;
 
-import com.zhouyu.service.ZhouyuService;
+import com.sonnsei.service.ZhouyuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

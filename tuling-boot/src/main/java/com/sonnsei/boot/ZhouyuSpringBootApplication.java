@@ -1,4 +1,4 @@
-package com.zhouyu.boot;
+package com.sonnsei.boot;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

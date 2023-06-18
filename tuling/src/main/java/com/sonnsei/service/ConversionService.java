@@ -1,7 +1,6 @@
-package com.zhouyu.service;
+package com.sonnsei.service;
 
 import org.springframework.context.weaving.LoadTimeWeaverAware;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.stereotype.Component;
 

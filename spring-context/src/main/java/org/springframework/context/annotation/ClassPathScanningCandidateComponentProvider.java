@@ -312,6 +312,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	 * @return a corresponding Set of autodetected bean definitions
 	 */
 	public Set<BeanDefinition> findCandidateComponents(String basePackage) {
+		//META-INF:spring.components,就是整体扫描了，但是该有的注解还是得有
 		if (this.componentsIndex != null && indexSupportsIncludeFilters()) {
 			return addCandidateComponentsFromIndex(this.componentsIndex, basePackage);
 		}
@@ -420,7 +421,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	private Set<BeanDefinition> scanCandidateComponents(String basePackage) {
 		Set<BeanDefinition> candidates = new LinkedHashSet<>();
 		try {
-			// 获取basePackage下所有的文件资源
+			// 获取basePackage下所有的文件资源，形如classpath*:com/sonnsei/**/*.class
 			String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
 					resolveBasePackage(basePackage) + '/' + this.resourcePattern;
 
@@ -440,6 +441,8 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 							ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
 							sbd.setSource(resource);
 
+							//是独立类并且是实体类，或者 非实体类但是有lookup注解的方法。
+							//实体类是非接口、非抽象类。独立类就是顶级类
 							if (isCandidateComponent(sbd)) {
 								if (debugEnabled) {
 									logger.debug("Identified candidate component class: " + resource);

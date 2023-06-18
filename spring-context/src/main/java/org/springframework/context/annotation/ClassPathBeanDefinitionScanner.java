@@ -272,6 +272,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 			Set<BeanDefinition> candidates = findCandidateComponents(basePackage);
 
 			for (BeanDefinition candidate : candidates) {
+				//处理scope
 				ScopeMetadata scopeMetadata = this.scopeMetadataResolver.resolveScopeMetadata(candidate);
 				candidate.setScope(scopeMetadata.getScopeName());
 
@@ -285,8 +286,10 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 					AnnotationConfigUtils.processCommonDefinitionAnnotations((AnnotatedBeanDefinition) candidate);
 				}
 
-				// 检查Spring容器中是否已经存在该beanName
+				// 检查Spring容器中是否已经存在该beanName。
+				// 如果有重复的，绝大多数情况下是异常，而且即便是有兼容，也不会再重新注册
 				if (checkCandidate(beanName, candidate)) {
+					//beanName在holder里面
 					BeanDefinitionHolder definitionHolder = new BeanDefinitionHolder(candidate, beanName);
 					definitionHolder =
 							AnnotationConfigUtils.applyScopedProxyMode(scopeMetadata, definitionHolder, this.registry);
@@ -349,6 +352,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 			existingDef = originatingDef;
 		}
 		// 是否兼容，如果兼容返回false表示不会重新注册到Spring容器中，如果不冲突则会抛异常。
+		// 创建的时候可以指定两个相同的路径，此时会触发两次扫描，就可能出现兼容的情况。判断逻辑就是看对应的resource是否相同
 		if (isCompatible(beanDefinition, existingDef)) {
 			return false;
 		}
